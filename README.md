@@ -14,18 +14,19 @@ The data file for this application is the same as in previous assignments: http:
 
 The commit insists on completely writing  all the data to disk every time it is called. The program can be speeded up greatly by moving the commit operation outside of the loop. In any database program, there is a balance between the number of  operations you execute between commits and the importance of not losing the  results of operations that have not yet been committed. 
 
-```import sqlite3```
 
-```conn = sqlite3.connect('emaildb2.sqlite')
-cur = conn.cursor()```
+```import sqlite3
 
-```cur.execute('''
-DROP TABLE IF EXISTS Counts''')```
+conn = sqlite3.connect('emaildb2.sqlite')
+cur = conn.cursor()
 
-```cur.execute('''
-CREATE TABLE Counts (org TEXT, count INTEGER)''')```
+cur.execute('''
+DROP TABLE IF EXISTS Counts''')
 
-```fname = input('Enter file name: ')
+cur.execute('''
+CREATE TABLE Counts (org TEXT, count INTEGER)''')
+
+fname = input('Enter file name: ')
 if (len(fname) < 1): fname = 'mbox.txt'
 fh = open(fname)
 list_1 =[]
@@ -34,9 +35,9 @@ for line in fh:
     pieces = line.split()
     email = pieces[1]
     dom = email.find('@')
-    org = email[dom+1:len(email)]```
+    org = email[dom+1:len(email)]
 
-    ```cur.execute('SELECT count FROM Counts WHERE org = ? ', (org,))
+    cur.execute('SELECT count FROM Counts WHERE org = ? ', (org,))
     row = cur.fetchone()
     if row is None:
         cur.execute('''INSERT INTO Counts (org, count)
@@ -51,4 +52,5 @@ sqlstr = 'SELECT org, count FROM Counts ORDER BY count DESC LIMIT 10'
 for row in cur.execute(sqlstr):
     print(str(row[0]), row[1])
 
-cur.close()```
+cur.close()
+```
