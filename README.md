@@ -1,6 +1,6 @@
 # Counting-Email-in-a-Database
 
-COUNTING ORGANIZATIONS
+_COUNTING EMAIL WITH ORGANIZATIONS DOMAIN NAME_
 
 This application will read the mailbox data (mbox.txt) count up the number email messages per organization (i.e. domain name of the email address) using a database with the following schema to maintain the counts: 
 
@@ -15,7 +15,8 @@ The data file for this application is the same as in previous assignments: http:
 The commit insists on completely writing  all the data to disk every time it is called. The program can be speeded up greatly by moving the commit operation outside of the loop. In any database program, there is a balance between the number of  operations you execute between commits and the importance of not losing the  results of operations that have not yet been committed. 
 
 
-```import sqlite3
+``` 
+import sqlite3
 
 conn = sqlite3.connect('emaildb2.sqlite')
 cur = conn.cursor()
